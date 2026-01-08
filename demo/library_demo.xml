@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <!-- Demo Books -->
+        <record id="demo_book_1" model="library.book">
+            <field name="name">Clean Code</field>
+            <field name="author">Robert C. Martin</field>
+            <field name="isbn">978-0132350884</field>
+            <field name="publisher">Prentice Hall</field>
+            <field name="publication_date">2008-08-01</field>
+            <field name="category">technology</field>
+            <field name="pages">464</field>
+            <field name="total_copies">3</field>
+            <field name="description">Even bad code can function. But if code isn't clean, it can bring a development organization to its knees.</field>
+        </record>
+
+        <record id="demo_book_2" model="library.book">
+            <field name="name">The Pragmatic Programmer</field>
+            <field name="author">Andrew Hunt, David Thomas</field>
+            <field name="isbn">978-0135957059</field>
+            <field name="publisher">Addison-Wesley</field>
+            <field name="publication_date">2019-09-13</field>
+            <field name="category">technology</field>
+            <field name="pages">352</field>
+            <field name="total_copies">2</field>
+        </record>
+
+        <record id="demo_book_3" model="library.book">
+            <field name="name">Sapiens: A Brief History of Humankind</field>
+            <field name="author">Yuval Noah Harari</field>
+            <field name="isbn">978-0062316097</field>
+            <field name="publisher">Harper</field>
+            <field name="publication_date">2015-02-10</field>
+            <field name="category">history</field>
+            <field name="pages">464</field>
+            <field name="total_copies">5</field>
+        </record>
+
+        <!-- Demo Members -->
+        <record id="demo_member_1" model="library.member">
+            <field name="name">John Doe</field>
+            <field name="email">john.doe@example.com</field>
+            <field name="phone">+62 812 3456 7890</field>
+            <field name="membership_type">premium</field>
+            <field name="address">Jl. Merdeka No. 123, Jakarta</field>
+        </record>
+
+        <record id="demo_member_2" model="library.member">
+            <field name="name">Jane Smith</field>
+            <field name="email">jane.smith@example.com</field>
+            <field name="phone">+62 813 9876 5432</field>
+            <field name="membership_type">student</field>
+            <field name="address">Jl. Sudirman No. 456, Bandung</field>
+        </record>
+
+        <record id="demo_member_3" model="library.member">
+            <field name="name">Bob Johnson</field>
+            <field name="email">bob.johnson@example.com</field>
+            <field name="phone">+62 821 1122 3344</field>
+            <field name="membership_type">standard</field>
+            <field name="address">Jl. Gatot Subroto No. 789, Surabaya</field>
+        </record>
+
+        <!-- Demo Borrowings -->
+        <record id="demo_borrowing_1" model="library.borrowing">
+            <field name="member_id" ref="demo_member_1"/>
+            <field name="book_id" ref="demo_book_1"/>
+            <field name="borrow_date" eval="(DateTime.today() - timedelta(days=5)).strftime('%Y-%m-%d')"/>
+            <field name="due_date" eval="(DateTime.today() + timedelta(days=9)).strftime('%Y-%m-%d')"/>
+            <field name="state">borrowed</field>
+        </record>
+
+        <record id="demo_borrowing_2" model="library.borrowing">
+            <field name="member_id" ref="demo_member_2"/>
+            <field name="book_id" ref="demo_book_3"/>
+            <field name="borrow_date" eval="(DateTime.today() - timedelta(days=20)).strftime('%Y-%m-%d')"/>
+            <field name="due_date" eval="(DateTime.today() - timedelta(days=6)).strftime('%Y-%m-%d')"/>
+            <field name="state">borrowed</field>
+            <field name="notes">Member requested extension</field>
+        </record>
+    </data>
+</odoo>
