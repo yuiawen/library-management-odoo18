@@ -7,10 +7,7 @@
 Jalankan command ini untuk verifikasi:
 
 ```bash
-# Cek apakah masih ada 'tree' di file views
 docker compose exec odoo grep -r "<tree" /mnt/extra-addons/custom/library_management/views/
-
-# Kalau ada output, berarti masih ada yang salah!
 ```
 
 **Expected result**: Tidak ada output (tidak ada file yang pakai `<tree>`)
@@ -65,8 +62,6 @@ docker compose exec odoo bash -lc "odoo -c /etc/odoo/odoo.conf -d odoo18_dev -i 
 ### Step 4: Jika Ada Error, Uninstall Dulu
 
 ```bash
-# Login ke Odoo UI, uninstall manual dari Apps menu
-# Atau drop database dan buat baru:
 docker compose exec db psql -U odoo -c "DROP DATABASE odoo18_dev;"
 docker compose exec db psql -U odoo -c "CREATE DATABASE odoo18_dev;"
 
@@ -97,7 +92,6 @@ INFO odoo18_dev odoo.service.server: Initiating shutdown
 **Solusi**: File views masih pakai `<tree>` bukan `<list>`
 
 ```bash
-# Cek dan ganti manual
 docker compose exec odoo sed -i 's/<tree/<list/g; s/<\/tree>/<\/list>/g' /mnt/extra-addons/custom/library_management/views/*.xml
 ```
 
@@ -111,7 +105,6 @@ docker compose exec odoo sed -i 's/<tree/<list/g; s/<\/tree>/<\/list>/g' /mnt/ex
 
 ```bash
 docker compose restart odoo
-# Lalu di UI: Apps → Update Apps List
 ```
 
 ---
